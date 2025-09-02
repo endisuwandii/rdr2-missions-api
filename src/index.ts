@@ -1,14 +1,16 @@
 import { Hono } from "hono";
 import { missions } from "./data";
+
 const app = new Hono();
 
 app.get("/", (c) => {
-  return c.text("Hello User!");
+  return c.text("Hello User Welcome!");
 });
 
 app.get("/missions", (c) => {
   return c.json(missions);
 });
+
 app.get("/missions/:id", (c) => {
   const id = Number(c.req.param("id"));
   const mission = missions.find((m) => m.id === id);
@@ -19,4 +21,10 @@ app.get("/missions/:id", (c) => {
   }
 });
 
-export default app;
+const server = Bun.serve({
+  port: 4000,
+
+  fetch: app.fetch,
+});
+
+console.log(`Listening on ${server.url}`);
