@@ -4,7 +4,7 @@ import { missions } from "./data";
 const app = new Hono();
 
 app.get("/", (c) => {
-  return c.text("Hello User Welcome!");
+  return c.text(" Welcome Red Dead Redemtion 2!");
 });
 
 app.get("/missions", (c) => {
