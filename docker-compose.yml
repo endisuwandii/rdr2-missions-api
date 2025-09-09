@@ -1,18 +1,17 @@
-version: '3.8'
-
 services:
-  backend-api:
+  backend:
+    image: rdr2-missions-image
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: rdr2-missions-api
-    restart: unless-stopped
     ports:
       - "4000:4000"
-    volumes:
-     
-      - .:/src/index
-      - /src/index/node_modules
-   
-    working_dir: /src/index
-    command: bun run start
+    depends_on:
+      - database
+  database:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: rdr2_missions_user
+      POSTGRES_PASSWORD: rdr2_missions_password
+      POSTGRES_DB: rdr2_missions_database
