@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rdr2-missions-api
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+     
+      - .:/src/index
+      - /src/index/node_modules
+   
+    working_dir: /src/index
+    command: bun run start
