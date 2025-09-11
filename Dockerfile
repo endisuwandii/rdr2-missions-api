@@ -1,19 +1,9 @@
-FROM oven/bun
-
+FROM oven/bun:debian
 
 WORKDIR /src/index
 
-
-COPY package.json bun.lock ./
-
-
-RUN bun install --frozen-lockfile
-
-
 COPY . .
 
+RUN bun install 
 
-EXPOSE 4000
-
-
-CMD ["bun", "run", "start"]
+CMD ["bun", "start"]
