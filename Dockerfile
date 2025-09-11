@@ -1,19 +1,15 @@
-FROM oven/bun
+# Use the official Bun image with Debian Linux
+# Oven is the company name, the creator of Bun
+FROM oven/bun:debian
 
+# Create and change to the app directory
+WORKDIR /usr/src/app
 
-WORKDIR /src/index
-
-
-COPY package.json bun.lock ./
-
-
-RUN bun install --frozen-lockfile
-
-
+# Copy app files
 COPY . .
 
+# Install app dependencies
+RUN bun install
 
-EXPOSE 4000
-
-
-CMD ["bun", "run", "start"]
+# Run the application
+CMD ["bun", "start"]
