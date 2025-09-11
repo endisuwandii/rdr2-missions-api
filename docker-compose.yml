@@ -4,7 +4,7 @@ services:
     build:
       context: .
     ports:
-      - "3000:4000"
+      - "3000:3000"
     depends_on:
       - database
 
@@ -13,6 +13,5 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: rdr2_missions_user
-      POSTGRES_PASSWORD: rdr2_missions_password
-      POSTGRES_DB: rdr2_missions_database
+      path: .env
+      required: true
