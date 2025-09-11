@@ -22,7 +22,7 @@ app.get("/missions/:id", (c) => {
 });
 
 const server = Bun.serve({
-  port: 4000,
+  port: 3000,
 
   fetch: app.fetch,
 });
