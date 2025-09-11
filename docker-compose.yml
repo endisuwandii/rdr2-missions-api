@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 backend:
   image: rdr2-missions-image
   build:
@@ -16,22 +16,3 @@ database:
     POSTGRES_USER: rdr2_missions_user
     POSTGRES_PASSWORD: rdr2_missions_password
     POSTGRES_DB: rdr2_missions_database
-=======
-services:
-  backend:
-    image: rdr2-missions-image
-    build:
-      context: .
-    ports:
-      - "4000:4000"
-    depends_on:
-      - database
-  database:
-    image: postgres:alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: rdr2_missions_user
-      POSTGRES_PASSWORD: rdr2_missions_password
-      POSTGRES_DB: rdr2_missions_database
->>>>>>> be572117f6843512815ddb7ca95237040d5c895e
