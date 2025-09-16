@@ -1,13 +1,4 @@
 services:
-  backend:
-    image: rdr2-missions-image
-    build:
-      context: .
-    ports:
-      - "3000:3000"
-    depends_on:
-      - database
-
   database:
     image: postgres:alpine
     ports:
