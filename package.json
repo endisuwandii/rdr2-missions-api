@@ -5,6 +5,7 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "hono": "^4.9.5",
     "prisma": "^6.16.2"
   },

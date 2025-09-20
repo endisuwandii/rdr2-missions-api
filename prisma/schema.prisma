@@ -13,3 +13,12 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Missions {
+  id  Int @id @default(autoincrement())
+
+  title String
+  
+  descriptions String
+}
