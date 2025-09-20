@@ -4,17 +4,21 @@ import { PrismaClient } from "./src/generated/prisma";
 const prisma = new PrismaClient();
 
 async function main() {
-  const newMision = await prisma.missions.create({
-    data: { title: "Outlaws from the West" },
+  const newMission = await prisma.mission.create({
+    data: {
+      title: "Outlaws from the West",
+      chapter: "1",
+      description:
+        "Arthur dan geng mencari perlindungan di pegunungan bersalju setelah perampokan yang gagal.",
+    },
   });
 
-  console.log({ newMision });
+  console.log({ newMission });
 
-  const missions = await prisma.missions.findMany();
+  const missions = await prisma.mission.findMany();
 
   console.log({ missions });
 }
-
 main()
   .then(async () => {
     await prisma.$disconnect();
