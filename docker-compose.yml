@@ -3,6 +3,6 @@ services:
     image: postgres:alpine
     ports:
       - "5432:5432"
-    environment:
-      path: .env
-      required: true
+    env_file:
+      - path: .env
+        required: true
