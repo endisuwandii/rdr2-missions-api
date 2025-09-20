@@ -21,6 +21,18 @@ app.get("/missions/:id", (c) => {
   }
 });
 
+app.post("/missions", async (c) => {
+  const body = await c.req.json();
+
+  const newMision = await db.missions.create({
+    data: {
+      title: body.title,
+    },
+  });
+
+  return c.json(newMision);
+});
+
 const server = Bun.serve({
   port: 3000,
 
