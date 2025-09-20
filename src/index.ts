@@ -30,11 +30,30 @@ app.post("/missions", async (c) => {
   const newMision = await db.mission.create({
     data: {
       title: body.title,
+      chapter: body.chapter,
       description: body.description,
     },
   });
 
   return c.json(newMision);
+});
+
+app.delete("/missions/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+
+  if (isNaN(id)) {
+    return c.json({ error: "Invalid mission ID." }, 400);
+  }
+
+  try {
+    const deletedMission = await db.mission.delete({
+      where: { id: id },
+    });
+    return c.json(deletedMission);
+  } catch (error) {
+    // Menangani kasus jika misi dengan ID tersebut tidak ditemukan
+    return c.json({ error: "Mission not found or could not be deleted." }, 404);
+  }
 });
 
 const server = Bun.serve({
