@@ -14,21 +14,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model mission {
+model Mission {
   id          Int    @id @default(autoincrement())
   chapter     String
   title       String
   description String
 }
 
-model character {
+model Character {
   id      Int    @id @default(autoincrement())
   name    String @unique
   role    String
   mission String
 }
 
-model location {
+model Location {
   id      Int    @id @default(autoincrement())
   name    String @unique
   chapter String
