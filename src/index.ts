@@ -41,18 +41,19 @@ app.post("/missions", async (c) => {
 app.delete("/missions/:id", async (c) => {
   const id = Number(c.req.param("id"));
 
-  if (isNaN(id)) {
-    return c.json({ error: "Invalid mission ID." }, 400);
-  }
-
   try {
     const deletedMission = await db.mission.delete({
-      where: { id: id },
+      where: {
+        id: id,
+      },
     });
-    return c.json(deletedMission);
+
+    return c.json({
+      message: "Misi berhasil dihapus",
+      mission: deletedMission,
+    });
   } catch (error) {
-    // Menangani kasus jika misi dengan ID tersebut tidak ditemukan
-    return c.json({ error: "Mission not found or could not be deleted." }, 404);
+    return c.json({ message: "Misi Not Found" }, 404);
   }
 });
 
