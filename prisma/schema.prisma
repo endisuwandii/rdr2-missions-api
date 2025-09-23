@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Mission {
+model mission {
   id          Int    @id @default(autoincrement())
   chapter     String
   title       String
