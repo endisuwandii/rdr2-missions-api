@@ -13,7 +13,7 @@
     "db:reset": "prisma migrate reset --skip-seed"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "bun run prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",
