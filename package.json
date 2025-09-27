@@ -12,12 +12,16 @@
     "db:studio": "prisma studio --browser none",
     "db:reset": "prisma migrate reset --skip-seed"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.16.2",
     "hono": "^4.9.5",
     "prisma": "^6.16.2"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "ts-node": "^10.9.2"
   }
 }
