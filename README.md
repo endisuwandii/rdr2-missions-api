@@ -1,6 +1,6 @@
 # RDR2 Missions Backend REST API
 
-## URL DEMO :
+## LIVE DEMO :
 
 https://rdr2-missions-api-production.up.railway.app/
 
