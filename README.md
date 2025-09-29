@@ -44,7 +44,9 @@ The project was created as part of backend learning to demonstrate the basic pri
 
 To install dependencies:
 
-- bun install
+```bash
+ bun install
+```
 
 ### 1. Clone the repository
 
