@@ -1,112 +1,52 @@
 # RDR2 Missions Backend REST API
 
-## 📋 Tabel Endpoint - Missions API
+## 📋 Endpoint Table - Missions API
 
-| Method | Endpoint        | Deskripsi                               | Status ✅/❌ |
-| ------ | --------------- | --------------------------------------- | ------------ |
-| GET    | `/`             | Menampilkan pesan selamat datang        | ✅           |
-| GET    | `/missions`     | Mengambil semua data misi               | ✅           |
-| GET    | `/missions/:id` | Mengambil detail misi berdasarkan ID    | ✅           |
-| POST   | `/missions`     | Menambahkan misi baru                   | ✅           |
-| DELETE | `/missions/:id` | Menghapus misi berdasarkan ID           | ✅           |
-| PATCH  | `/missions/:id` | _Belum tersedia - update sebagian data_ | ❌           |
-| PUT    | `/missions/:id` | _Belum tersedia - update seluruh data_  | ❌           |
-| DELETE | `/missions`     | _Belum tersedia - hapus semua misi_     | ❌           |
+| Method | Endpoint        | Description                                 | Status ✅/❌ |
+| ------ | --------------- | ------------------------------------------- | ------------ |
+| GET    | `/`             | Displays a welcome message                  | ✅           |
+| GET    | `/missions`     | Retrieves all mission data                  | ✅           |
+| GET    | `/missions/:id` | Retrieves mission details by ID             | ✅           |
+| POST   | `/missions`     | Adds a new mission                          | ✅           |
+| DELETE | `/missions/:id` | Deletes a mission by ID                     | ✅           |
+| PATCH  | `/missions/:id` | _Not available yet - partially update data_ | ❌           |
+| PUT    | `/missions/:id` | _Not available yet - fully update data_     | ❌           |
+| DELETE | `/missions`     | _Not available yet - delete all missions_   | ❌           |
 
 ## 🚀 Base URL
 
 ###### http://localhost:3000
 
-Selamat datang di RDR2 Missions API! Proyek ini adalah REST API sederhana yang dibuat menggunakan Hono dan Bun untuk menyajikan data misi dari game populer, Red Dead Redemption 2.
+# 🎮 RDR2 Missions API
 
-Proyek ini dibangun sebagai bagian dari pembelajaran backend untuk mendemonstrasikan prinsip-prinsip dasar API, routing, dan penanganan data.
+Welcome to the **RDR2 Missions API**!  
+This is a simple REST API built with [Hono](https://hono.dev) and [Bun](https://bun.sh) to serve mission data from the popular game _Red Dead Redemption 2_.
 
-Fitur
+The project was created as part of backend learning to demonstrate the basic principles of APIs, routing, and data handling.
 
-    RESTful API: Menggunakan metode HTTP standar (GET) untuk mengakses data misi.
+---
 
-    Data Palsu (Mock Data): Menyajikan data dari array JavaScript, tanpa memerlukan database.
+## ✨ Features
 
-    Cepat & Ringan: Dibuat dengan Hono, framework web minimalis yang sangat cepat, dan Bun, runtime JavaScript yang modern.
+- **RESTful API** → Uses standard HTTP methods (GET) to access mission data.
+- **Mock Data** → Provides data from a JavaScript array (no database required).
+- **Fast & Lightweight** → Powered by Hono (minimalist web framework) and Bun (modern JavaScript runtime).
 
-Persyaratan
+---
 
-Pastikan Anda telah menginstal Bun di komputer Anda. Anda dapat mengunduhnya dari Bun.sh.
+## 📦 Requirements
 
-Cara Menjalankan Proyek
+- [Bun](https://bun.sh) installed on your computer.
 
-Ikuti langkah-langkah sederhana ini untuk menjalankan API di lingkungan lokal Anda.
+---
 
-    Kloning repositori ini:
-    Bash
+## 🚀 Getting Started
 
-git clone https://github.com/nama-pengguna-anda/rdr2-missions-api.git
+Follow these steps to run the project locally:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/rdr2-missions-api.git
 cd rdr2-missions-api
-
-Instal dependensi:
-Bash
-
-bun install
-
-Jalankan server pengembangan:
-Bash
-
-    bun run dev
-
-Server akan berjalan di http://localhost:3000.
-
-Endpoints API
-
-API ini menyediakan dua endpoint utama untuk mengakses data misi. Anda bisa mengujinya menggunakan browser atau API client seperti Hoppscotch atau Postman.
-
-GET /missions
-
-Mengambil daftar semua misi yang tersedia.
-
-Contoh Respons:
-
-JSON
-
-[
-{
-"id": 1,
-"chapter": 1,
-"title": "Outlaws from the West",
-"description": "Arthur dan geng mencari perlindungan di pegunungan bersalju setelah perampokan yang gagal."
-},
-{
-"id": 2,
-"chapter": 1,
-"title": "Enter, Pursued by a Memory",
-"description": "Arthur dan Javier mencari John Marston yang hilang di tengah badai salju."
-}
-]
-
-GET /missions/:id
-
-Mengambil detail satu misi berdasarkan ID. Ganti :id dengan ID misi yang Anda inginkan (misalnya, 1, 2, dst.).
-
-Contoh Respons:
-
-GET /missions/1
-JSON
-
-{
-"id": 1,
-"chapter": 1,
-"title": "Outlaws from the West",
-"description": "Arthur dan geng mencari perlindungan di pegunungan bersalju setelah perampokan yang gagal."
-}
-
-Respons Jika Misi Tidak Ditemukan (Status 404):
-
-GET /missions/999
-JSON
-
-{
-"message": "Misi tidak ditemukan"
-}
-
-Kontribusi
-
-Proyek ini terbuka untuk kontribusi! Jika Anda ingin menambahkan misi lain atau meningkatkan kode, silakan buka issue atau kirimkan pull request.
+```
