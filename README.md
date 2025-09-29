@@ -2,6 +2,15 @@
 
 # REST API Endpoints
 
+Endpoint HTTP Description Done
+/animals GET Get all animals ✅
+/animals/:id GET Get animal by id ✅
+/animals POST Add new animal
+/animals DELETE Delete all animals
+/animals/:id DELETE Delete animal by id
+/animals/:id PATCH Patch animal by id
+/animals/:id PUT Update animal by id
+
 Selamat datang di RDR2 Missions API! Proyek ini adalah REST API sederhana yang dibuat menggunakan Hono dan Bun untuk menyajikan data misi dari game populer, Red Dead Redemption 2.
 
 Proyek ini dibangun sebagai bagian dari pembelajaran backend untuk mendemonstrasikan prinsip-prinsip dasar API, routing, dan penanganan data.
