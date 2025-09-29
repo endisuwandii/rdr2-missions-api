@@ -1,6 +1,17 @@
 # RDR2 Missions Backend REST API
 
-# REST API Endpoints
+## 📋 Tabel Endpoint - Missions API
+
+| Method | Endpoint        | Deskripsi                               | Status ✅/❌ |
+| ------ | --------------- | --------------------------------------- | ------------ |
+| GET    | `/`             | Menampilkan pesan selamat datang        | ✅           |
+| GET    | `/missions`     | Mengambil semua data misi               | ✅           |
+| GET    | `/missions/:id` | Mengambil detail misi berdasarkan ID    | ✅           |
+| POST   | `/missions`     | Menambahkan misi baru                   | ✅           |
+| DELETE | `/missions/:id` | Menghapus misi berdasarkan ID           | ✅           |
+| PATCH  | `/missions/:id` | _Belum tersedia - update sebagian data_ | ❌           |
+| PUT    | `/missions/:id` | _Belum tersedia - update seluruh data_  | ❌           |
+| DELETE | `/missions`     | _Belum tersedia - hapus semua misi_     | ❌           |
 
 ## 🚀 Base URL
 
