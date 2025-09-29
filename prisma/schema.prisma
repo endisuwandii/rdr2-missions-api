@@ -11,7 +11,7 @@ datasource db {
 model Mission {
   id          Int    @id @default(autoincrement())
   chapter     String
-  title       String @unique // Setiap misi memiliki judul yang unik
+  title       String @unique
   description String
 
   characters Character[]
@@ -31,7 +31,7 @@ model Character {
 
 model Location {
   id      Int    @id @default(autoincrement())
-  name    String @unique // Nama lokasi harus unik
+  name    String @unique
   chapter String
 
   missionId Int
