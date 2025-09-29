@@ -48,6 +48,12 @@ To install dependencies:
  bun install
 ```
 
+To run :
+
+```bash
+bun run dev
+```
+
 ### 1. Clone the repository
 
 ```bash
