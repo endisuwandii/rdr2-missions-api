@@ -2,9 +2,7 @@
 
 ## URL DEMO :
 
-```bash
- rdr2-missions-api-production.up.railway.app
-```
+https://rdr2-missions-api-production.up.railway.app/
 
 ## 📋 Endpoint Table - Missions API
 
