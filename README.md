@@ -1,4 +1,6 @@
-RDR2 Missions API
+# RDR2 Missions Backend REST API
+
+# REST API Endpoints
 
 Selamat datang di RDR2 Missions API! Proyek ini adalah REST API sederhana yang dibuat menggunakan Hono dan Bun untuk menyajikan data misi dari game populer, Red Dead Redemption 2.
 
