@@ -42,7 +42,8 @@ The project was created as part of backend learning to demonstrate the basic pri
 
 ## 🚀 Getting Started
 
-Follow these steps to run the project locally:
+To install dependencies:
+bun install
 
 ### 1. Clone the repository
 
