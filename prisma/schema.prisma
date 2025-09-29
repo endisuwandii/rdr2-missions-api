@@ -8,39 +8,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Model Mission (Misi)
-// Satu misi dapat memiliki banyak karakter dan lokasi
 model Mission {
-  id          Int         @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   chapter     String
-  title       String      @unique // Setiap misi memiliki judul yang unik
+  title       String @unique // Setiap misi memiliki judul yang unik
   description String
-  // Relasi: Satu Misi memiliki banyak Karakter
-  characters  Character[]
-  // Relasi: Satu Misi memiliki banyak Lokasi
-  locations   Location[]
+
+  characters Character[]
+
+  locations Location[]
 }
 
-// Model Character (Karakter)
-// Setiap karakter terhubung ke satu Misi
 model Character {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique // Nama karakter harus unik
-  role      String
-  // Ini adalah kunci asing (Foreign Key) yang menghubungkan ke Mission
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  role String
+
   missionId Int
-  // Definisi relasi ke model Mission
-  mission   Mission @relation(fields: [missionId], references: [id])
+
+  mission Mission @relation(fields: [missionId], references: [id])
 }
 
-// Model Location (Lokasi)
-// Setiap lokasi terhubung ke satu Misi
 model Location {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique // Nama lokasi harus unik
-  chapter   String
-  // Ini adalah kunci asing (Foreign Key) yang menghubungkan ke Mission
+  id      Int    @id @default(autoincrement())
+  name    String @unique // Nama lokasi harus unik
+  chapter String
+
   missionId Int
-  // Definisi relasi ke model Mission
-  mission   Mission @relation(fields: [missionId], references: [id])
+
+  mission Mission @relation(fields: [missionId], references: [id])
 }
