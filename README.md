@@ -43,7 +43,8 @@ The project was created as part of backend learning to demonstrate the basic pri
 ## 🚀 Getting Started
 
 To install dependencies:
-bun install
+
+- bun install
 
 ### 1. Clone the repository
 
