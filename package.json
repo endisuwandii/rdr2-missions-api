@@ -1,10 +1,10 @@
 {
   "name": "rdr2-missions-api",
   "scripts": {
-   
+    "postinstall": "bun run db:gen",
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
-    "build": "bun install",
+    "build": "bun run db:gen",
     "db:up": "docker compose up -d",
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
