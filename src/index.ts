@@ -1,65 +1,29 @@
-import { Hono } from "hono";
-import { missions } from "./data";
-import { db } from "./lib/db";
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { apiReference, Scalar } from "@scalar/hono-api-reference";
+import { missionsRoute } from "./modules/missions/route";
 
-const app = new Hono();
+const app = new OpenAPIHono();
 
-app.get("/", (c) => {
-  return c.text(" Welcome Red Dead Redemtion 2!");
+// Logic: Daftarkan rute dengan prefix "/api/missions"
+app.route("/api/missions", missionsRoute);
+
+
+
+
+app.doc("/openapi.json", {
+  openapi: "3.0.0",
+  info: {
+    title: "rdr2 API",
+    version: "1.0.0",
+  },
 });
 
-app.get("/missions", async (c) => {
-  const missions = await db.mission.findMany();
+app.get(
+  "/",
+  Scalar({
+    pageTitle: " rdr2 API",
+    url: "/openapi.json",
+  })
+);
 
-  return c.json(missions);
-});
-
-app.get("/missions/:id", async (c) => {
-  const id = Number(c.req.param("id"));
-
-  const mission = await db.mission.findUnique({
-    where: { id },
-  });
-
-  return c.json(mission);
-});
-
-app.post("/missions", async (c) => {
-  const body = await c.req.json();
-
-  const newMision = await db.mission.create({
-    data: {
-      title: body.title,
-      chapter: body.chapter,
-      description: body.description,
-    },
-  });
-
-  return c.json(newMision);
-});
-
-app.delete("/missions/:id", async (c) => {
-  const id = Number(c.req.param("id"));
-
-  try {
-    const deletedMission = await db.mission.delete({
-      where: {
-        id: id,
-      },
-    });
-
-    return c.json({
-      message: "Misi berhasil dihapus",
-      mission: deletedMission,
-    });
-  } catch (error) {
-    return c.json({ message: "Misi Not Found" }, 404);
-  }
-});
-
-const server = Bun.serve({
-  port: 3000,
-  fetch: app.fetch,
-});
-
-console.log(`Listening on ${server.url}`);
+export default app;
