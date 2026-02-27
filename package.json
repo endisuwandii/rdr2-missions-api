@@ -1,6 +1,7 @@
 {
   "name": "rdr2-missions-api",
   "scripts": {
+   
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
     "build": "bun install",
