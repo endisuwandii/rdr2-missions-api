@@ -1,6 +1,6 @@
 import { z } from "@hono/zod-openapi";
 
-// 1. SCHEMA DASAR
+
 export const MissionSchema = z.object({
   id: z.number().openapi({ example: 1 }),
   title: z.string().openapi({ 
@@ -17,7 +17,7 @@ export const MissionSchema = z.object({
 
 export const MissionsSchema = z.array(MissionSchema);
 
-// 2. SCHEMA RELASI
+
 const CharacterInMissionSchema = z.object({
   id: z.number(),
   name: z.string().openapi({ example: "Dutch van der Linde" }),
@@ -35,7 +35,7 @@ export const MissionDetailSchema = MissionSchema.extend({
   locations: z.array(LocationInMissionSchema),
 });
 
-// 3. SCHEMA REQUEST
+
 export const SlugParamSchema = z.object({
   slug: z.string().openapi({ 
     param: { name: "slug", in: "path" },

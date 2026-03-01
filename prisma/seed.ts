@@ -1,12 +1,11 @@
 import { PrismaClient } from "../src/generated/prisma";
 
-// WAJIB pakai object kosong di Prisma v7 config-mode
+
 const prisma = new PrismaClient({});
 
 async function main() {
   console.log("🤠 Menjalankan Seed RDR2 (Format Slug Lowercase)...");
 
-  // Hapus data lama (urutan penting untuk hindari foreign key error)
   await prisma.character.deleteMany();
   await prisma.location.deleteMany();
   await prisma.mission.deleteMany();
