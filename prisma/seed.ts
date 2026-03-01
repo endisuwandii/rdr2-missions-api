@@ -1,78 +1,58 @@
 import { PrismaClient } from "../src/generated/prisma";
 
-const prisma = new PrismaClient();
+// WAJIB pakai object kosong di Prisma v7 config-mode
+const prisma = new PrismaClient({});
 
 async function main() {
-  console.log("Memulai proses seeding...");
-  await prisma.location.deleteMany();
+  console.log("🤠 Menjalankan Seed RDR2 (Format Slug Lowercase)...");
+
+  // Hapus data lama (urutan penting untuk hindari foreign key error)
   await prisma.character.deleteMany();
+  await prisma.location.deleteMany();
   await prisma.mission.deleteMany();
 
-  const missionAlpha = await prisma.mission.upsert({
-    where: { title: "Misi Penyelamatan Sandera" },
-    update: {},
-    create: {
+  await prisma.mission.create({
+    data: {
+      title: "old-friends",
       chapter: "Chapter 1",
-      title: "Misi Penyelamatan Sandera",
-      description: "Misi untuk menyelamatkan sandera di area terlarang.",
+      description:
+        "Dutch leads the gang on an attack against an O'Driscoll camp.",
+      characters: {
+        create: [
+          { name: "Dutch van der Linde", role: "Leader" },
+          { name: "Arthur Morgan", role: "Enforcer" },
+        ],
+      },
+      locations: {
+        create: [{ name: "colter", chapter: "Chapter 1" }],
+      },
     },
   });
 
-  const missionBeta = await prisma.mission.upsert({
-    where: { title: "Misi Pencarian Artefak Kuno" },
-    update: {},
-    create: {
-      chapter: "Chapter 2",
-      title: "Misi Pencarian Artefak Kuno",
-      description: "Misi untuk menemukan artefak kuno di reruntuhan.",
-    },
-  });
-
-  const char1 = await prisma.character.upsert({
-    where: { name: "Arthur Morgan" },
-    update: { missionId: missionAlpha.id },
-    create: {
-      name: "Arthur Morgan",
-      role: "Pemimpin Tim",
-      mission: { connect: { id: missionAlpha.id } },
-    },
-  });
-
-  const char2 = await prisma.character.upsert({
-    where: { name: "John Marston" },
-    update: { missionId: missionAlpha.id },
-    create: {
-      name: "John Marston",
-      role: "Ahli Taktik",
-      mission: { connect: { id: missionAlpha.id } },
-    },
-  });
-
-  const loc1 = await prisma.location.upsert({
-    where: { name: "Gudang Terlantar" },
-    update: { missionId: missionAlpha.id },
-    create: {
-      name: "Gudang Terlantar",
+  await prisma.mission.create({
+    data: {
+      title: "enter-pursued-by-a-memory",
       chapter: "Chapter 1",
-      mission: { connect: { id: missionAlpha.id } },
+      description:
+        "Arthur and Javier go out into a blizzard to find a missing John Marston.",
+      characters: {
+        create: [
+          { name: "Javier Escuella", role: "Scout" },
+          { name: "John Marston", role: "Target" },
+        ],
+      },
+      locations: {
+        create: [{ name: "mount-hagen", chapter: "Chapter 1" }],
+      },
     },
   });
 
-  const loc2 = await prisma.location.upsert({
-    where: { name: "Reruntuhan Kuno" },
-    update: { missionId: missionBeta.id },
-    create: {
-      name: "Reruntuhan Kuno",
-      chapter: "Chapter 2",
-      mission: { connect: { id: missionBeta.id } },
-    },
-  });
-
-  console.log("Seeding selesai!");
+  console.log("✅ Seed Berhasil!");
 }
 
 main()
   .catch((e) => {
+    console.error("❌ Full Error:");
     console.error(e);
     process.exit(1);
   })

@@ -1,29 +1,23 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { apiReference, Scalar } from "@scalar/hono-api-reference";
+import { Scalar } from "@scalar/hono-api-reference";
 import { missionsRoute } from "./modules/missions/route";
+
 
 const app = new OpenAPIHono();
 
-// Logic: Daftarkan rute dengan prefix "/api/missions"
+// Daftarkan rute-rute modul
 app.route("/api/missions", missionsRoute);
 
 
-
-
 app.doc("/openapi.json", {
-  openapi: "3.0.0",
-  info: {
-    title: "rdr2 API",
+  openapi: "3.1.0",
+  info: { 
+    title: "RDR2 API", 
     version: "1.0.0",
+    description: "API Portofolio Endi Suwandi - Universitas Sebelas April"
   },
 });
 
-app.get(
-  "/",
-  Scalar({
-    pageTitle: " rdr2 API",
-    url: "/openapi.json",
-  })
-);
+app.get("/", Scalar({ spec: { url: "/openapi.json" }, theme: "purple" }));
 
 export default app;
