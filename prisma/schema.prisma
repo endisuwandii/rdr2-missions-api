@@ -1,23 +1,24 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
-    engineType = "binary"
+  // Kalau lu pakai adapter-pg di file seed lu, wajib buka komen di bawah ini:
+  previewFeatures = ["driverAdapters"] 
 }
 
 datasource db {
   provider = "postgresql"
-  
+
 }
 
 model Mission {
   id          Int    @id @default(autoincrement())
   chapter     String
   title       String @unique
+  slug        String @unique // Ditambahin biar sinkron sama data seed
   description String
 
-  characters Character[]
-
-  locations Location[]
+  // Relasi Many-to-Many (Otomatis dibuatin tabel perantara sama Prisma)
+  characters  Character[]
+  locations   Location[]
 }
 
 model Character {
@@ -25,9 +26,8 @@ model Character {
   name String @unique
   role String
 
-  missionId Int
-
-  mission Mission @relation(fields: [missionId], references: [id])
+  // Relasi Many-to-Many ke Mission
+  missions Mission[]
 }
 
 model Location {
@@ -35,7 +35,6 @@ model Location {
   name    String @unique
   chapter String
 
-  missionId Int
-
-  mission Mission @relation(fields: [missionId], references: [id])
+  // Relasi Many-to-Many ke Mission
+  missions Mission[]
 }

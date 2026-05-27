@@ -1,22 +1,24 @@
 import { z } from "@hono/zod-openapi";
 
-
 export const MissionSchema = z.object({
   id: z.number().openapi({ example: 1 }),
-  title: z.string().openapi({ 
+  slug: z.string().openapi({
     example: "old-friends",
-    description: "Judul misi dalam format slug lowercase" 
+    description: "Format URL ramah SEO (lowercase, huruf dan strip saja)",
   }),
-  description: z.string().openapi({ 
-    example: "Attack the O'Driscoll camp." 
+  title: z.string().openapi({
+    example: "Old Friends",
+    description: "Judul asli misi",
   }),
-  chapter: z.string().openapi({ 
-    example: "Chapter 1" 
+  description: z.string().openapi({
+    example: "Dutch leads the gang on an attack against an O'Driscoll camp.",
+  }),
+  chapter: z.string().openapi({
+    example: "Chapter 1",
   }),
 });
 
 export const MissionsSchema = z.array(MissionSchema);
-
 
 const CharacterInMissionSchema = z.object({
   id: z.number(),
@@ -35,24 +37,28 @@ export const MissionDetailSchema = MissionSchema.extend({
   locations: z.array(LocationInMissionSchema),
 });
 
-
 export const SlugParamSchema = z.object({
-  slug: z.string().openapi({ 
+  slug: z.string().openapi({
     param: { name: "slug", in: "path" },
-    example: "old-friends" 
+    example: "old-friends",
   }),
 });
 
 export const CreateMissionSchema = z.object({
-  title: z.string().min(3).openapi({ 
+  title: z.string().min(3).openapi({
+    example: "Enter, Pursued by a Memory",
+    description: "Judul asli misi",
+  }),
+  slug: z.string().min(3).openapi({
     example: "enter-pursued-by-a-memory",
-    description: "Wajib menggunakan format slug lowercase"
+    description: "Wajib menggunakan format slug lowercase",
   }),
-  description: z.string().min(10).openapi({ 
-    example: "Find John Marston in the mountains during a blizzard." 
+  description: z.string().min(10).openapi({
+    example:
+      "Arthur and Javier go out into a blizzard to find a missing John Marston.",
   }),
-  chapter: z.string().openapi({ 
-    example: "Chapter 1" 
+  chapter: z.string().openapi({
+    example: "Chapter 1",
   }),
 });
 

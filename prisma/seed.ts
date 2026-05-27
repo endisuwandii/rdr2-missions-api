@@ -1,60 +1,59 @@
-import { PrismaClient } from "../src/generated/prisma";
+import "dotenv/config";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
+// Tembak langsung ke node_modules biar Bun nggak rewel
+import { PrismaClient } from "../node_modules/.prisma/client";
+// Import data misi lu dari file data.ts
+import { missions } from "../src/data";
 
-
-const prisma = new PrismaClient({});
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🤠 Menjalankan Seed RDR2 (Format Slug Lowercase)...");
+  console.log(
+    `🤠 Memulai proses seeding ${missions.length} misi RDR2 menggunakan PG Adapter...`,
+  );
 
-  await prisma.character.deleteMany();
-  await prisma.location.deleteMany();
-  await prisma.mission.deleteMany();
+  // Looping data dari file data.ts
+  for (const mission of missions) {
+    // Menggunakan UPSERT: Aman dijalankan berkali-kali tanpa takut data dobel
+    await prisma.mission.upsert({
+      where: { id: mission.id },
+      update: {
+        title: mission.title,
+        slug: mission.slug,
+        chapter: `Chapter ${mission.chapter}`, // Transformasi angka jadi string "Chapter X"
+        description: mission.description,
+      },
+      create: {
+        id: mission.id,
+        slug: mission.slug,
+        title: mission.title,
+        chapter: `Chapter ${mission.chapter}`,
+        description: mission.description,
+      },
+    });
 
-  await prisma.mission.create({
-    data: {
-      title: "old-friends",
-      chapter: "Chapter 1",
-      description:
-        "Dutch leads the gang on an attack against an O'Driscoll camp.",
-      characters: {
-        create: [
-          { name: "Dutch van der Linde", role: "Leader" },
-          { name: "Arthur Morgan", role: "Enforcer" },
-        ],
-      },
-      locations: {
-        create: [{ name: "colter", chapter: "Chapter 1" }],
-      },
-    },
-  });
+    console.log(`⏳ Disimpan: ${mission.title}`);
+  }
 
-  await prisma.mission.create({
-    data: {
-      title: "enter-pursued-by-a-memory",
-      chapter: "Chapter 1",
-      description:
-        "Arthur and Javier go out into a blizzard to find a missing John Marston.",
-      characters: {
-        create: [
-          { name: "Javier Escuella", role: "Scout" },
-          { name: "John Marston", role: "Target" },
-        ],
-      },
-      locations: {
-        create: [{ name: "mount-hagen", chapter: "Chapter 1" }],
-      },
-    },
-  });
-
-  console.log("✅ Seed Berhasil!");
+  console.log(
+    "✅ Semua data geng Van der Linde berhasil mendarat di database!",
+  );
 }
 
 main()
-  .catch((e) => {
-    console.error("❌ Full Error:");
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
+  .then(async () => {
+    // Putus koneksi dengan aman
     await prisma.$disconnect();
+    await pool.end();
+  })
+  .catch(async (e) => {
+    console.error("❌ Waduh, Seeding Gagal:");
+    console.error(e);
+    await prisma.$disconnect();
+    await pool.end();
+    process.exit(1);
   });
