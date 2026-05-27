@@ -11,25 +11,29 @@
     "db:gen": "prisma generate --no-hints",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio --browser none",
-    "db:reset": "prisma migrate reset --skip-seed"
+    "db:reset": "prisma migrate reset"
   },
   "prisma": {
     "seed": "bun run prisma/seed.ts"
   },
   "dependencies": {
     "@hono/zod-openapi": "^1.2.2",
-    "@prisma/adapter-pg": "^7.4.1",
+    "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.4.1",
     "@prisma/config": "^7.4.1",
     "@scalar/hono-api-reference": "^0.9.45",
     "hono": "^4.9.5",
-    "pg": "^8.19.0",
+    "pg": "^8.20.0",
     "prisma": "^7.4.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/pg": "^8.16.0",
-    "ts-node": "^10.9.2"
+    "@types/node": "^25.5.2",
+    "@types/pg": "^8.20.0",
+    "dotenv": "^17.4.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
   }
 }
